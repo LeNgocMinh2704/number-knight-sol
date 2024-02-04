@@ -59,3 +59,15 @@ const connectPhantom = async () => {
 document
   .getElementById("connect-phantom")
   .addEventListener("click", connectPhantom);
+  function openModal() {
+    var modal = document.getElementById("myModal");
+    modal.style.display = "block";
+  }
+  
+  // Function to close the modal
+  function closeModal() {
+    var modal = document.getElementById("myModal");
+    modal.style.display = "none";
+  }
+  
+  document.getElementById("marketplace").addEventListener("click", openModal);

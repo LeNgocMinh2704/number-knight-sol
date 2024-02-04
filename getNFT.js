@@ -30,10 +30,10 @@ const walletFormatAddress = (address, maxLength) => {
 async function fetchImage() {
   try {
     const response = await fetch(
-      "https://api.inz-dev.esollabs.com/v1/nft-mkp/marketplace/discover?chain_id=123123&min=1&max=10&recently=true"
+      "https://api.inz-dev.esollabs.com/v1/nft-mkp/marketplace/profile_nft?address=4t5r6AavtsS3Yh87Rv2nLik5nJCMRARhoUCjUY9nABZv"
     );
     const data = await response.json();
-    console.log(data[0].nft_list[0].image_url);
+    console.log(data)
     return data; // Assuming your API response has a property 'imageUrl' containing the image URL
   } catch (error) {
     console.error("Error fetching image:", error);
@@ -93,7 +93,7 @@ async function appendImage() {
     });
   };
   if (imageUrls.length > 0) {
-    imageUrls.forEach((imageUrl, index) => {
+    imageUrls.map((imageUrl, index) => {
       const imageDiv = document.createElement("div");
       const imageElement = document.createElement("img");
       const NFT_name = document.createElement("p");
@@ -102,33 +102,33 @@ async function appendImage() {
       const NFT_Owner_div = document.createElement("div");
       const Select_btn = document.createElement("button");
       // Set the image source
-      imageElement.src = imageUrl.nft_list[0].image_url;
+      imageElement.src = imageUrl.image_url;
       imageElement.className = "w-[208px] h-[214px] shrink-0 rounded-lg";
 
       NFT_Owner_div.className = "flex flex-row-reverse item-center gap-[8px]";
       NFT_Owner_div.innerHTML = walletFormatAddress(
-        imageUrl.owner.public_address,
+        imageUrl.owner,
         12
       );
 
-      NFT_Owner_avatar.src = imageUrl.owner.avatar;
+      NFT_Owner_avatar.src = imageUrl.owner_image_url;
       NFT_Owner_avatar.className = "rounded-full w-[28px] h-[28px]";
 
       Select_btn.setAttribute("id", "Select_btn");
-      Select_btn.setAttribute("url", imageUrl.nft_list[0].image_url);
+      Select_btn.setAttribute("url", imageUrl.image_url);
       Select_btn.className =
         "bg-[#E665B0] rounded-[0px_0px_16px_16px] text-[#FFF] text-[20px] font-[500] absolute bottom-0 right-0 left-0 h-[47px] ";
       Select_btn.innerHTML = "Select";
       Select_btn.addEventListener("click", () =>
-        handleChange(imageUrl.nft_list[0].image_url)
+        handleChange(imageUrl.image_url)
       );
 
       NFT_Owner.innerHTML = walletFormatAddress(
-        imageUrl.owner.public_address,
+        imageUrl.owner,
         12
       );
 
-      NFT_name.innerHTML = imageUrl.nft_list[0].nft_name;
+      NFT_name.innerHTML = imageUrl.name;
       NFT_name.className = "text-[16px] font-[600] leading-[24px] text-start ";
 
       // Append the image element to the div
