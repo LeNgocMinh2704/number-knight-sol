@@ -36,7 +36,9 @@ form#main_game_dialog{
 }
 .main-character {
 }
-
+#PlayGame_sound{
+  display: none;
+}
 body {
   --scrollX: 0px;
   margin: 0;

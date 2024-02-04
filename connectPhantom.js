@@ -48,26 +48,30 @@ const connectPhantom = async () => {
     const p_address = document.getElementById("walletAddress");
     p_address.innerHTML = `Welcome: ${userAccount}`;
     const buttonPlay = document.getElementById("PlayGame_sound");
-      buttonPlay.style.display = "block";
+    buttonPlay.style.display = "block";
     // 26qv4GCcx98RihuK3c4T6ozB3J7L6VwCuFVc7Ta2A3Uo
   } catch (err) {
     // { code: 4001, message: 'User rejected the request.' }
   }
-  provider.on("connect", () => console.log("connected!"));
+  provider.on("connect", () => {
+    console.log("connected!");
+    const buttonPlay = document.getElementById("PlayGame_sound");
+    buttonPlay.style.display = "block";
+  });
 };
 
 document
   .getElementById("connect-phantom")
   .addEventListener("click", connectPhantom);
-  function openModal() {
-    var modal = document.getElementById("myModal");
-    modal.style.display = "block";
-  }
-  
-  // Function to close the modal
-  function closeModal() {
-    var modal = document.getElementById("myModal");
-    modal.style.display = "none";
-  }
-  
-  document.getElementById("marketplace").addEventListener("click", openModal);
+function openModal() {
+  var modal = document.getElementById("myModal");
+  modal.style.display = "block";
+}
+
+// Function to close the modal
+function closeModal() {
+  var modal = document.getElementById("myModal");
+  modal.style.display = "none";
+}
+
+document.getElementById("marketplace").addEventListener("click", openModal);
